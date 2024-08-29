@@ -7,3 +7,6 @@ export const excercisesTable = pgTable("excercises", {
   created_at: text("created_at").notNull().default("now()"),
   updated_at: text("updated_at").notNull().default("now()"),
 });
+
+export type SelectExcercise = typeof excercisesTable.$inferSelect;
+export type InsertExcercise = typeof excercisesTable.$inferInsert;

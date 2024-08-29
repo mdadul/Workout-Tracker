@@ -31,3 +31,7 @@ export const workoutsTable = pgTable("workouts", {
     .notNull()
     .$onUpdate(() => new Date()),
 });
+
+
+export type SelectWorkout = typeof workoutsTable.$inferSelect;
+export type InsertWorkout = typeof workoutsTable.$inferInsert;
