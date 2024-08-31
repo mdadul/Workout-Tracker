@@ -8,6 +8,20 @@
       "when": 1725082335058,
       "tag": "0000_talented_brood",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1725104400246,
+      "tag": "0001_flowery_praxagora",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1725104463541,
+      "tag": "0002_demonic_valkyrie",
+      "breakpoints": true
     }
   ]
 }
