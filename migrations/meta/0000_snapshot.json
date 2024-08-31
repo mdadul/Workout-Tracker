@@ -1,5 +1,5 @@
 {
-  "id": "4d63b559-849e-4e54-aab1-c3a782c79ca0",
+  "id": "139cf2e6-f424-474a-a0cb-50ecfbbf7ecc",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -26,19 +26,24 @@
           "primaryKey": false,
           "notNull": true
         },
-        "created_at": {
-          "name": "created_at",
+        "category": {
+          "name": "category",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'now()'"
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
-          "default": "'now()'"
+          "notNull": true
         }
       },
       "indexes": {},
@@ -54,7 +59,8 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "name": {
           "name": "name",
@@ -78,7 +84,7 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "default": "now()"
         },
         "updated_at": {
