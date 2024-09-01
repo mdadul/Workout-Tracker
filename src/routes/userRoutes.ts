@@ -1,9 +1,9 @@
 import { Hono } from "hono";
-import { getUser } from "../controllers/userController";
+import { getMyInfo } from "../controllers/userController";
 import { authMiddleware } from "../middlewares/auth";
 
 const userRoutes = new Hono();
 
-userRoutes.get("/", authMiddleware, getUser);
+userRoutes.get("/me", authMiddleware, getMyInfo);
 
 export default userRoutes;
