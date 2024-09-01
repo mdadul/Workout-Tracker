@@ -24,6 +24,8 @@ export const authMiddleware = async (c: Context, next: Function) => {
       throw new Error("Token expired");
     }
 
+    c.set("userId", decodedPayload.id);
+    c.set("email", decodedPayload.email);
 
     await next();
   } catch (error) {
