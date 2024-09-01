@@ -1,5 +1,6 @@
 import { Context } from "hono";
 import {
+  getWorkoutProgressByUserId,
   getWorkoutsListByUserId,
   InsertWorkoutDetailsService,
   postWorkoutService,
@@ -98,7 +99,6 @@ export const removeWorkout = async (c: Context) => {
   }
 };
 
-
 export const postWorkoutDetails = async (c: Context) => {
   const userId = c.get("userId");
   const workoutId = parseInt(c.req.param("id"));
@@ -117,7 +117,7 @@ export const postWorkoutDetails = async (c: Context) => {
 
     return c.json({ success: false, message: "Something went wrong" }, 500);
   }
-}
+};
 
 export const putWorkoutDetails = async (c: Context) => {
   const userId = c.get("userId");
@@ -138,7 +138,7 @@ export const putWorkoutDetails = async (c: Context) => {
 
     return c.json({ success: false, message: "Something went wrong" }, 500);
   }
-}
+};
 
 export const removeWorkoutDetails = async (c: Context) => {
   const userId = c.get("userId");
@@ -155,4 +155,19 @@ export const removeWorkoutDetails = async (c: Context) => {
 
     return c.json({ success: false, message: "Something went wrong" }, 500);
   }
-}
+};
+
+export const getReports = async (c: Context) => {
+  const userId = c.get("userId");
+
+  try {
+    const workoutList = await getWorkoutProgressByUserId(userId);
+    return c.json({ success: true, data: workoutList }, 200);
+  } catch (error) {
+    if (error instanceof Error) {
+      return c.json({ success: false, message: error.message });
+    }
+
+    return c.json({ success: false, message: "Something went wrong" }, 500);
+  }
+};

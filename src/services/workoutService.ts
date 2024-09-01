@@ -52,8 +52,7 @@ export async function workoutById(
         excercise: {
           id: excercisesTable.id,
           name: excercisesTable.name,
-          category: excercisesTable.category
-
+          category: excercisesTable.category,
         },
       })
       .from(workoutDetailsTable)
@@ -184,6 +183,39 @@ export async function removeWorkoutDetailsService(
         )
       );
     return result;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+//  Generate reports on past workouts and progress.
+
+export async function getWorkoutProgressByUserId(
+  userId: SelectWorkout["createdBy"]
+) {
+  try {
+    const result = await db
+      .select()
+      .from(workoutsTable)
+      .where(eq(workoutsTable.createdBy, userId))
+      .orderBy(workoutsTable.created_at);
+
+    const totalWorkouts = result.length;
+    const activeWorkouts = result.filter(
+      (workout) => workout.status === "active"
+    ).length;
+
+    const progress =
+      totalWorkouts > 0 ? (activeWorkouts / totalWorkouts) * 100 : 0;
+
+    const stat = {
+      totalWorkouts,
+      activeWorkouts,
+      progress,
+    };
+
+    return stat;
   } catch (error) {
     console.log(error);
     throw error;
